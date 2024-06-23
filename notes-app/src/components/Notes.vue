@@ -2,19 +2,25 @@
     <div class="notes">
         <div :class="['note', note.priority, { full: !grid }]" class="note" v-for="(note, index) in notes" :key="index">
             <div :class="{ full: !grid }" class="note-header">
-                <p>{{ note.title }}</p>
-                <p style="cursor: pointer;" @click="deleteNote(index)">x</p>
+                <HiddenInput :title="note.title" @save="updateTitle(index, $event)" />
+                <p style="cursor: pointer;" @click="deleteNote(index)">&#9747;</p>
             </div>
             <div class="note-body">
                 <p>{{ note.description }}</p>
-                <span>{{ note.date }}</span>
+                <div class="note-specification">
+                    <span>{{ note.date }}</span>
+                    <span>{{ note.priority }}</span>
+                </div>
+
             </div>
         </div>
     </div>
 </template>
 
 <script>
+import HiddenInput from './HiddenInput.vue'
 export default {
+    components: { HiddenInput },
     props: {
         notes: {
             type: Array,
@@ -26,6 +32,9 @@ export default {
         }
     },
     methods: {
+        updateTitle(index, newTitle) {
+            this.notes[index].title = newTitle;
+        },
         deleteNote(index) {
             this.$emit('delete', index)
             console.log(`Note id ${index} - removed`)
@@ -48,14 +57,14 @@ export default {
 
 .note {
     width: 48%;
-    padding: 18px 20px;
+    padding: 17px 20px;
     margin-bottom: 20px;
     background-color: #fff;
     border-radius: 3px;
     transition: all 0.25s cubic-bezier(.02, .01, .47, 1);
 
-    &.simple {
-        border-left: 5px solid #31df1e;
+    &.standart {
+        border-left: 5px solid #1ecedb;
     }
 
     &.important {
@@ -130,6 +139,11 @@ export default {
 }
 
 .note-body {
+    .note-specification {
+        display: flex;
+        justify-content: space-between;
+    }
+
     p {
         margin: 20px 0;
     }

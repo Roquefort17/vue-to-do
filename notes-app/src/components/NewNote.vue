@@ -4,10 +4,13 @@
         <input v-model="note.title" type="text" />
         <div class="choose-priority">
             <select v-model="note.priority">
-                <option v-for="(option, index) in note.option" :key="index" :value="option">
+                <option 
+                v-for="(option, index) in note.option" 
+                :key="index" 
+                :value="option"
+                >
                     {{ option }}
                 </option>
-
             </select>
         </div>
         <label>Description</label>
@@ -22,7 +25,6 @@ export default {
         note: {
             type: Object,
             required: true
-
         }
     },
     methods: {

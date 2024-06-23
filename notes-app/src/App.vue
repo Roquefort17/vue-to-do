@@ -8,9 +8,7 @@
           <div class="note-header">
             <h1>{{ title }}</h1>
             <search @search="search = $event" :value="search" placeholder="Find your note" />
-            <div class="ico
-            
-            s">
+            <div class="icos">
               <svg :class="{ active: grid }" @click="grid = true" style="cursor: pointer;"
                 xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -71,15 +69,15 @@ export default {
       note: {
         title: '',
         description: '',
-        priority: 'simple',
-        option: ['simple', 'important', 'very-important']
+        priority: 'standart',
+        option: ['standart', 'important', 'very-important']
       },
       notes: [
         {
           title: 'First Note',
           description: 'Description for first note',
           date: new Date(Date.now()).toLocaleString(),
-          priority: 'simple'
+          priority: 'standart'
         },
         {
           title: 'Second Note',
@@ -129,7 +127,7 @@ export default {
         this.message = null
         this.note.title = '';
         this.note.description = '';
-        this.note.priority = 'simple'
+        this.note.priority = 'standart'
 
       }
 
